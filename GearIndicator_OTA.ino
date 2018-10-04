@@ -14,7 +14,7 @@ const int menuPin = 4;
 
 int connected=1;
 volatile int buttonState = 0;         // variable for reading the pushbutton st
-int brightness=3;
+int brightness=12;
 
 ESP8266WebServer server(80);
 
@@ -167,16 +167,35 @@ void handleNotFound(){
 }
 
 void setup() {
+  int conn_attempt = 0;
   Serial.begin(115200);
   Serial.println("Booting");
+
+   // Initializing the display and set it to medium brighntess
+  lc.shutdown(0,false);
+  lc.setIntensity(0,brightness);
+  lc.clearDisplay(0);
+  Serial.println("Display initialized");
+
+  
+  Serial.println("Attempting WiFi connect");
+  showCharacter(12);
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
-  while (WiFi.waitForConnectResult() != WL_CONNECTED) {
-    Serial.println("Connection Failed! Rebooting...");
-    connected=0;
-  }
 
-  if(connected != 0) {
+  delay(500);
+  
+  if (WiFi.waitForConnectResult() == WL_CONNECTED)
+  {
+    Serial.println(F("WiFi connected"));
+    connected=1;
+  } else
+    connected=0;
+  
+  lc.clearDisplay(0);
+    
+  if(connected == 1) {
+     Serial.println("We are online. Activating OTA.");
     ArduinoOTA.onStart([]() {
       Serial.println("Start");
     });
@@ -244,11 +263,6 @@ void setup() {
     Serial.println("SPIFFS is formatted. Moving along...");
   }
 
-  // Initializing the display and set it to medium brighntess
-  lc.shutdown(0,false);
-  lc.setIntensity(0,brightness);
-  lc.clearDisplay(0);
-
   // Interrupt setup for brightness button
   pinMode(brightnessPin, INPUT);
   attachInterrupt(0, brightness_btn, RISING);
@@ -268,16 +282,17 @@ void setup() {
   
   // Display Suzuki Logo
   showCharacter(8);
+  delay(250);
 }
 
 void brightness_btn() {
   buttonState = digitalRead(brightnessPin);
     if(buttonState == HIGH) {
     
-    if(brightness > 1)
-      brightness--;
+    if(brightness == 12)
+      brightness=5;
     else
-      brightness=24;   
+      brightness=12;   
   }
   lc.setIntensity(0,brightness);
 }
@@ -286,12 +301,13 @@ void menu_btn() {
   // test - just clear screen
   lc.clearDisplay(0);
 }
+
 void loop() {
   // While riding, we might not have wireless
-  if(connected != 0) {
+  if(connected == 1) {
     ArduinoOTA.handle();
     server.handleClient();
-  }
+  } 
   // Main function - reading ADC and displaying gear number
   show_gear();
 }
