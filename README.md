@@ -14,6 +14,13 @@ The ESP 8266 can measure a voltage between 0 and 1 volt on his ADC. To be able t
 The program does what is promised. Based on the voltage detected on the ADC it will show N or 1 to 6 on the 8x8 matrix display. It also display a Suzuki logo at start which can be changed of course. One button can be used to switch between high and low brightness (day/night). I would have rather used a photo resistor for that but the ESP8266 only got one ADC. The numbers/signs are generated with an online tool - the link to it is in the code. As we got wireless I am making use of it. There are the following options:
 
 http://ip/demo - show all signs/numbers sequentially on the display
-http://ip/learn - this starts a 3 minute long process reading valued from ADC and storing them in gears.txt. This is the time where you start your motorcycle and shift through all gears
+
+http://ip/learn - this starts a 3 minute long process reading values from the ADC pin and storing them in gears.txt. This is the time where you start your motorcycle and shift through all gears
+
 http://ip/show - displays the values we just stored in gears.txt. This is the tool you use to change the values in the program code for every gear. It is unlikely that my values work for you - they are also dependant on the voltage divider you use.
+
 http://ip/reset - deletes the gears.txt file and might require a reboot of the ESP. It is actually unnecessary - everytime you start /learn it will overwrite the old values. But keep in mind that this does not change your program code - thats always something that needs to be done.
+
+4. Parts List
+
+1x ESP8266 (e.g. NodeMCU eBay $8 or Jaycar XC3800 $39), 1x 8x8 MAX7219 LED Matrix (Jaycar XC4499), 1x Small case, 2 Resistor and some wires
