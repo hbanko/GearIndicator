@@ -13,7 +13,7 @@ const int brightnessPin = 0;
 const int menuPin = 4; 
 
 int connected=1;
-volatile int buttonState = 0;         // variable for reading the pushbutton st
+volatile int buttonState = 0;
 int brightness=12;
 
 ESP8266WebServer server(80);
@@ -62,8 +62,8 @@ void showCharacter(int c) {
  
 }
 
-// This function reads 180 values in 3 minutes
-// One LED flash for one value read
+// This function reads 180 values in 3 minutes that will be stored in the flash of the ESP
+// Use these values as a base to change the show_gear() function values accordingly for every gear
 
 void learn() {
   int adcvalue=0;
@@ -94,12 +94,18 @@ void learn() {
 void show_gear() {
   int adcvalue=0;
   int adc_average=0;
- for(int x = 0; x < 10; x++) {
+  
+  // Taking 10 measurements
+  for(int x = 0; x < 10; x++) {
     adcvalue = analogRead(A0);
     delay(40);
     adc_average = adc_average + adcvalue;
-  }
+   }
+   // The truth is in the average
    adcvalue = adc_average / 10;
+
+   // Show the gear on the display based on our measurments.
+   // These values need to be adjusted for your motorcycle.
    
   if(adcvalue >= 299 && adcvalue<= 305) {  // Neutral
     showCharacter(0);
@@ -111,12 +117,13 @@ void show_gear() {
     showCharacter(3);
   } else if (adcvalue >= 203 && adcvalue<= 208) { // 4th Gear
     showCharacter(4);
-  } else if (adcvalue >= 250 && adcvalue<= 265) {
+  } else if (adcvalue >= 250 && adcvalue<= 265) { // 5th Gear
     showCharacter(5);
-  } else if (adcvalue >= 270 && adcvalue<= 285) {
+  } else if (adcvalue >= 270 && adcvalue<= 285) { // 6th Gear
     showCharacter(6);
   } 
 }
+
 String show () {
   String gears;
   showCharacter(12);
@@ -143,14 +150,11 @@ void displayDemo() {
 }
 
 void handleRoot() {
-  digitalWrite(led, 1);
   server.send(200, "text/html", "<html><head><title>Gear Indicator</title></head><body><h1>Hello from GearIndicator!</h1>Please use the following options: <br><br>/learn : Reads the voltages from the\\ 
   input line and stores them<br> /show : Display the values that were read in learn <br> /demo : Shows all characters and signs <br> /reset : Deletes the learned values</body></html>");
-  digitalWrite(led, 0);
 }
 
 void handleNotFound(){
-  digitalWrite(led, 1);
   String message = "File Not Found\n\n";
   message += "URI: ";
   message += server.uri();
@@ -163,7 +167,6 @@ void handleNotFound(){
     message += " " + server.argName(i) + ": " + server.arg(i) + "\n";
   }
   server.send(404, "text/plain", message);
-  digitalWrite(led, 0);
 }
 
 void setup() {
@@ -171,7 +174,7 @@ void setup() {
   Serial.begin(115200);
   Serial.println("Booting");
 
-   // Initializing the display and set it to medium brighntess
+   // Initializing the display and set brighntess
   lc.shutdown(0,false);
   lc.setIntensity(0,brightness);
   lc.clearDisplay(0);
