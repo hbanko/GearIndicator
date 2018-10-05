@@ -7,7 +7,7 @@ This GearIndicator was built for a 2003 Suzuki DL1000. It always annoyed not to 
 
 2. Voltage measurement
 
-The ESP 8266 can measure a voltage between 0 and 1 volt on his ADC. To be able to read the voltage from the signal wire I had to build a voltage divider. There are some online tools available but its not a difficult calculation. All you need are two resistors. In my case I started with a 100 and 470 ohm combination. That worked on the bench, but once hooked up to the motorcycle it started to confuse the ECU. What I learned is that it is smarter to use high ohm resistors as this will interfere less with the signal on the wire.
+The ESP 8266 can measure a voltage between 0 and 1 volt on his ADC. To be able to read the voltage from the signal wire I had to build a voltage divider. There are some online tools available but its not a difficult calculation. All you need are two resistors. In my case I started with a 100 and 470 ohm combination. That worked on the bench, but once hooked up to the motorcycle it started to confuse the ECU. What I learned is that it is smarter to use high ohm resistors as this will interfere less with the signal on the wire. I had good results with a combination of 47k and 22k.
 
 3. Function
 
@@ -23,4 +23,4 @@ http://ip/reset - deletes the gears.txt file and might require a reboot of the E
 
 4. Parts List
 
-1x ESP8266 (e.g. NodeMCU eBay $8 or Jaycar XC3800 $39), 1x 8x8 MAX7219 LED Matrix (Jaycar XC4499), 1x Small case, 2 Resistor and some wires
+ESP8266 (e.g. NodeMCU eBay $8 or Jaycar XC3800 $39), 8x8 MAX7219 LED Matrix (Jaycar XC4499), Small case, 1 47K Resistor, 22K Resistor, 1nf capacitor (optional) and some wires
