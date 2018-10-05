@@ -3,7 +3,7 @@ Display's the current gear a Suzuki DL1000 is using
 
 1. Project aim
 
-This GearIndicator was built for a 2003 Suzuki DL1000. It always annoyed not to know in what gear I am currently using. A lot of motorcycles got the Luxury of a gear display. But unfortunately not the old DL1000. There are some ready made solution you can buy that are suitable for many different types of motorcycles. But they come with a price tag and usually are > AUD $150. The good thing is that many motorcycles got a "signal wire" that indicates to the ECU which gear is in use. For the DL1000 this wire would have a voltage between 0 and 5 volts. All that needs to be done is measure the voltage on a micro controller and have it display something on an LED matrix display.
+This GearIndicator was built for a 2003 Suzuki DL1000. It always annoyed not to know in what gear I am currently using. A lot of motorcycles got the Luxury of a gear display. But unfortunately not the old DL1000. There are some ready made solution you can buy that are suitable for many different types of motorcycles. But they come with a price tag and usually are > AUD $150. The good thing is that many motorcycles got a "signal wire" that indicates to the ECU which gear is in use. For the DL1000 this wire would have a voltage between 0 and 5 volts. All that needs to be done is measure the voltage on a micro controller and have it display something on an LED matrix display. If you don't buy your ESP8266 from Jaycar you get away for all parts with something around $20 AUD.
 
 2. Voltage measurement
 
@@ -27,4 +27,4 @@ It is pretty easy to wire it all up. The voltage divider has 3 different wires. 
 
 5. Parts List
 
-ESP8266 (e.g. NodeMCU eBay $8 or Jaycar XC3800 $39), 8x8 MAX7219 LED Matrix (Jaycar XC4499), Small case, 47K Resistor, 22K Resistor, 1nf capacitor (optional), 5 Volt regulator (Jaycar ZV1505) and some wires
+ESP8266 (e.g. NodeMCU eBay $8 or Jaycar XC3800 $39), 8x8 MAX7219 LED Matrix (Jaycar XC4499), Small case, 47K Resistor, 22K Resistor, 1nf capacitor (optional), 5 Volt regulator (Jaycar ZV1560) and some wires
