@@ -23,4 +23,4 @@ http://ip/reset - deletes the gears.txt file and might require a reboot of the E
 
 4. Parts List
 
-ESP8266 (e.g. NodeMCU eBay $8 or Jaycar XC3800 $39), 8x8 MAX7219 LED Matrix (Jaycar XC4499), Small case, 1 47K Resistor, 22K Resistor, 1nf capacitor (optional) and some wires
+ESP8266 (e.g. NodeMCU eBay $8 or Jaycar XC3800 $39), 8x8 MAX7219 LED Matrix (Jaycar XC4499), Small case, 47K Resistor, 22K Resistor, 1nf capacitor (optional) and some wires
