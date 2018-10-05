@@ -21,6 +21,10 @@ http://ip/show - displays the values we just stored in gears.txt. This is the to
 
 http://ip/reset - deletes the gears.txt file and might require a reboot of the ESP. It is actually unnecessary - everytime you start /learn it will overwrite the old values. But keep in mind that this does not change your program code - thats always something that needs to be done.
 
-4. Parts List
+4. Wiring
 
-ESP8266 (e.g. NodeMCU eBay $8 or Jaycar XC3800 $39), 8x8 MAX7219 LED Matrix (Jaycar XC4499), Small case, 47K Resistor, 22K Resistor, 1nf capacitor (optional) and some wires
+It is pretty easy to wire it all up. The voltage divider has 3 different wires. One will go to your motorcycles gear position switch. On a VStrom thats usually a pink wire that can be located on the left side close to the tank. The "input" of the voltage divider need to be connected to this wire. The ground of the voltage divider should go to the battery (don't put it on the frame) and the remaining one is the "output". It will go on pin AD0 on your ESP8266 (thats the ADC). Whats left is the power and the display. To provide the ESP8266 with 5V power we bought a regulator. It will get 12V from your motorcycle and the 5V it outputs will go to VCC on your ESP. You need to find a power line that is providing 12V when ingition is turned on. GND can be connected to your battery. The display has to be hooked up to the ESP power as well and there are 3 lines to control it. They are labeled on the little circuit board. Data In goes to pin 7 (GPIO13), CLK to pin 5 (GPIO14) and CS to pin 8 (CS).
+
+5. Parts List
+
+ESP8266 (e.g. NodeMCU eBay $8 or Jaycar XC3800 $39), 8x8 MAX7219 LED Matrix (Jaycar XC4499), Small case, 47K Resistor, 22K Resistor, 1nf capacitor (optional), 5 Volt regulator (Jaycar ZV1505) and some wires
